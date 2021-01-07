@@ -1,0 +1,78 @@
+#\u6307\u5B9A\u7AEF\u53E3\u53F7
+server:
+  port: 8801
+  #  \u6307\u5B9Aservlet\u4E0A\u4E0B\u6587\u8DEF\u5F84
+  servlet:
+    context-path: /auth
+spring:
+  #  \u6570\u636E\u5E93\u914D\u7F6E
+  datasource:
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/itripdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+#        cloud:
+#        nacos:
+#        discovery:
+#        server-addr: 127.0.0.1:8848
+#        username: nacos
+#        password: nacos
+  application:
+    name: itrip-auth
+  #返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  mail:
+    default-encoding: utf-8
+    host: smtp.126.com
+    username: mo_168@126.com
+    password: usa911
+    protocol: smtp
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 994 #465\u6216\u8005994
+    properties.mail.display.sendmail: Javen
+    properties.mail.display.sendname: Spring Boot Guide Email
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    properties.mail.from: mo_168@126.com
+
+mybatis-plus:
+  mapper-locations: classpath:com/cskt/mapper/xml/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  type-aliases-package: com.cskt.entity
+  #mybatis-plus逻辑删除插件配置
+  global-config:
+    db-config:
+      # 逻辑删除的字段
+      logic-delete-field: isDeleted
+      #删除的值为1
+      logic-delete-value: 1
+      # 没有删除的值为0
+      logic-not-delete-value: 0
+
+
+
+#\u81EA\u5B9A\u4E49\u90AE\u4EF6\u53CA\u77ED\u4FE1\u9A8C\u8BC1\u7801\u7684\u53D1\u9001
+email:
+  send:
+    enable: false
+
+sms:
+  send:
+    enable: true
+
+#自定义交换机、路由及队列相关信息
+mq:
+  env: local
+  exchange:
+    name: ${mq.env}:mq:exchange:itrip
+  routing:
+    key:
+      name: ${mq.env}:mq:routing:key:itrip
+  queue:
+    name: ${mq.env}:mq:queue:itrip
