@@ -63,7 +63,7 @@ public class ItripProductStore implements Serializable {
     private Long modifiedBy;
 
     /**
-     * 逻辑删除（0:未删除；1：删除）
+     * 逻辑删除（0:未删除；1：删除）的
      */
     @TableField(value = "is_deleted")
     @ApiModelProperty(value="逻辑删除（0:未删除；1：删除）")
